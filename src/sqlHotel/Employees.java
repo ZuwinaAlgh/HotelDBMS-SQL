@@ -39,6 +39,31 @@ public class Employees {
             System.err.println(ex);
         }
 }
+	
+   public static void getById(){
+		
+	}
+	
+    public static void readFromTable(){
+		
+	}
+    
+    public static void updateById(){
+		
+	}
+    
+    public static void deleteById(){
+		
+	}
+    
+    public static void makeIsActiveFalseById(){
+		
+	}
+    
+    public static void insertIntoTable(){
+		
+	}
+    
 	}
 
 
