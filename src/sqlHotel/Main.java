@@ -21,7 +21,7 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-						Hotels.getById();
+						Hotels.updateById();
 						break;
 					case 2:
 						
