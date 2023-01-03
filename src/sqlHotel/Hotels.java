@@ -157,18 +157,18 @@ public class Hotels {
         	System.out.println("Enter id: ");
             int idinput =sa.nextInt();
             int count=0;
-            String sql = "UPDATE Hotels SET id = ?,hotel_name = ?, updated_date = ?, is_Active=? WHERE id = ?";
+            String sql = "UPDATE Hotels SET hotel_name = 'intercontenantil', hotel_location = 'alqurm', updated_date='2023-01-03' "+" WHERE id = '"+idinput+"'";
             ResultSet rs=st.executeQuery(sql);
             
       
-            	 int id=rs.getInt("id");
-                 String hotelname=rs.getString("hotel_name");
-                 String hotellocation= rs.getString("hotel_location");
-                 Date createddate= rs.getDate("created_date");
-                 Date updateddate= rs.getDate("updated_date");
-                 String isActive=rs.getString("is_Active");
-                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
-                 count++;
+//            	 int id=rs.getInt("id");
+//                 String hotelname=rs.getString("hotel_name");
+//                 String hotellocation= rs.getString("hotel_location");
+//                 Date createddate= rs.getDate("created_date");
+//                 Date updateddate= rs.getDate("updated_date");
+//                 String isActive=rs.getString("is_Active");
+//                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
+//                 count++;
                  
            
             }
