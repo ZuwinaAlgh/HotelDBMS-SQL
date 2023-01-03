@@ -5,6 +5,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -50,7 +51,6 @@ public class Hotels {
         String user = "sa";
         String pass = "root";
         
-		
         Connection con = null;
 
         try {
@@ -65,22 +65,25 @@ public class Hotels {
             Scanner sa=new Scanner(System.in);
         	System.out.println("How many User you want to read: ");
             int read =sa.nextInt();
-
+            int count=0;
             String sql="select * from Hotels";
-            ResultSet result=st.executeQuery(sql);
+            ResultSet rs=st.executeQuery(sql);
             
-            while (result.next() ) {
+            while (rs.next()&&count<=read) {
       
-            	 System.out.print("id: " + result.getInt("id"));
-                 System.out.print(",hotel_name: " + result.getString("hotel_name"));
-                 System.out.print(",hotel_location: " + result.getString("hotel_location"));
-                 System.out.print(",created_date: " + result.getString("created_date"));
-                 System.out.print(",updated_date: " + result.getDate("updated_date"));
-                 System.out.print(",is_Active: " + result.getString("is_Active"));
+            	int id=rs.getInt("id");
+                 String hotelname=rs.getString("hotel_name");
+                 String hotellocation= rs.getString("hotel_location");
+                 Date createddate= rs.getDate("created_date");
+                 Date updateddate= rs.getDate("updated_date");
+                 String isActive=rs.getString("is_Active");
+                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
+                 count++;
+                 
            
-            }
-            con.close();
-        }
+            }}
+      
+        
 
         catch (Exception ex) {
             System.err.println(ex);
