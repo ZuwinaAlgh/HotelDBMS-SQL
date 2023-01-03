@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	Hotels hotels=new Hotels();
-
+    Room_Type roomType=new Room_Type();
 	public static void main(String[] args) {
 		 Scanner sa=new Scanner(System.in);
 		    boolean menuExit = true;
@@ -21,7 +21,7 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-						Hotels.makeIsActiveFalseById();
+						Room_Type.insertIntoTable();
 						break;
 					case 2:
 						
