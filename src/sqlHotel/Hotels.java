@@ -160,15 +160,6 @@ public class Hotels {
             String sql = "UPDATE Hotels SET hotel_name = 'intercontenantil', hotel_location = 'alqurm', updated_date='2023-01-03' "+" WHERE id = '"+idinput+"'";
             ResultSet rs=st.executeQuery(sql);
             
-      
-//            	 int id=rs.getInt("id");
-//                 String hotelname=rs.getString("hotel_name");
-//                 String hotellocation= rs.getString("hotel_location");
-//                 Date createddate= rs.getDate("created_date");
-//                 Date updateddate= rs.getDate("updated_date");
-//                 String isActive=rs.getString("is_Active");
-//                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
-//                 count++;
                  
            
             }
@@ -183,6 +174,38 @@ public class Hotels {
 	}
     
     public static void deleteById(){
+    	
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            int count=0;
+            String sql ="DELETE FROM Hotels WHERE id = '"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
+            
+                 
+           
+            }
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
 		
 	}
     
