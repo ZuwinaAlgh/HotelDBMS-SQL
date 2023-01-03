@@ -1,10 +1,16 @@
 package sqlHotel;
 
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 	Hotels hotels=new Hotels();
     Room_Type roomType=new Room_Type();
+    Rooms room=new Rooms();
 	public static void main(String[] args) {
 		 Scanner sa=new Scanner(System.in);
 		    boolean menuExit = true;
@@ -21,20 +27,22 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-						Room_Type.insertIntoTable();
+						Hotels.insert10000Hotels();
+					
 						break;
 					case 2:
-						
+						Hotels.insertOneHotel();
+		
 						break;
 					case 3:
-					
+						Hotels.print10Hotels();
 						break;
 					case 4:
-					
+						Hotels.print10Active();
 						break;
 
 					case 5:
-						
+						Hotels.printHotelInformation();
 						 menuExit = false;
 			    	
 			        }}}

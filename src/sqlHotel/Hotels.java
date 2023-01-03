@@ -295,5 +295,210 @@ public class Hotels {
         }
 	
         }
+    
+    public static void insertOneHotel(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+       
+        
+        String hotel_name="w";
+        String hotel_location="Alqurm";
+        String created_date="2022-01-05";
+        String updated_date="2023-01-02";
+        boolean is_Active=true;
+        
+        
+        Random rn = new Random();
+        Integer numberToAdd = rn.nextInt(100);
+        
+        for(int i=0; i<=1;i++) {
+        	String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+        
+        
+        Connection con = null;
 
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+
+            int m = st.executeUpdate(sql);
+            if (m >=0)
+                System.out.println( "insert data successfully");
+            else
+                System.out.println("faild inserted ");
+
+            con.close();
+        }
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
+        }
+	
+        }
+    
+    public static void insert10000Hotels(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+    
+        String hotel_name="w";
+        String hotel_location="Alqurm";
+        String created_date="2022-01-05";
+        String updated_date="2023-01-02";
+        boolean is_Active=true;
+        
+        
+        Random rn = new Random();
+        Integer numberToAdd = rn.nextInt(100);
+        
+        for(int i=0; i<=10000;i++) {
+        	String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+        
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+
+            int m = st.executeUpdate(sql);
+            if (m >=0)
+                System.out.println( "insert data successfully");
+            else
+                System.out.println("faild inserted ");
+
+            con.close();
+        }
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
+        }
+    	
+    }
+    public static void print10Hotels(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+           
+            int count=0;
+            String sql="select * from Hotels";
+            ResultSet rs=st.executeQuery(sql);
+            
+            while (rs.next()&&count<=10) {
+      
+            	int id=rs.getInt("id");
+                 String hotelname=rs.getString("hotel_name");
+                 String hotellocation= rs.getString("hotel_location");
+                 Date createddate= rs.getDate("created_date");
+                 Date updateddate= rs.getDate("updated_date");
+                 String isActive=rs.getString("is_Active");
+                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
+                 count++;
+                 
+           
+            }}
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
+    }
+    public static void printHotelInformation(){
+		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter Hotel name: ");
+            String hotelname =sa.next();
+            System.out.println("Enter Hotel Location: ");
+            String hotellocation =sa.next();
+            
+            String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocation+"'";
+		     ResultSet result=st.executeQuery(sql);
+
+       
+
+            }
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
+    }
+    public static void print10Active() {
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+//            Scanner sa=new Scanner(System.in);
+//        	System.out.println("Enter id: ");
+//            int idinput =sa.nextInt();
+//            int count=0;
+            String sql = "UPDATE Hotels SET is_Active = 'false' "+" WHERE id <=10";
+            ResultSet rs=st.executeQuery(sql);
+            
+                 
+           
+            }
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
+    	
+    	
+    }
 	}
