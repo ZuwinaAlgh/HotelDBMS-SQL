@@ -24,7 +24,7 @@ public class Main {
 					Hotels.insertIntoTable();
 						break;
 					case 2:
-						
+						Hotels.readFromTable();
 						break;
 					case 3:
 					

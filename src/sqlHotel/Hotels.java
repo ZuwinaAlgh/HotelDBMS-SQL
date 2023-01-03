@@ -3,13 +3,14 @@ package sqlHotel;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Hotels {
 
-	public static void main(String[] args) {
+	public static void CreateTable(String[] args) {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
@@ -43,13 +44,61 @@ public class Hotels {
         
 	}
 	
-	public static void getById(){
+	
+	public static void readFromTable(){
+		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
 		
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("How many User you want to read: ");
+            int read =sa.nextInt();
+
+            String sql="select * from Hotels";
+            ResultSet result=st.executeQuery(sql);
+            
+            while (result.next() ) {
+      
+            	 System.out.print("id: " + result.getInt("id"));
+                 System.out.print(",hotel_name: " + result.getString("hotel_name"));
+                 System.out.print(",hotel_location: " + result.getString("hotel_location"));
+                 System.out.print(",created_date: " + result.getString("created_date"));
+                 System.out.print(",updated_date: " + result.getDate("updated_date"));
+                 System.out.print(",is_Active: " + result.getString("is_Active"));
+           
+            }
+            con.close();
+        }
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
+		}
+	
+	
+	public static void getById(){
+//		Scanner sa=new Scanner(System.in);
+//    	System.out.println("Enter id: ");
+//        int id =sa.nextInt();
+//        
+//        select * from
+        
+        	
 	}
 	
-    public static void readFromTable(){
-		
-	}
+ 
     
     public static void updateById(){
 		
@@ -113,4 +162,5 @@ public class Hotels {
         }
 	
         }
+
 	}
