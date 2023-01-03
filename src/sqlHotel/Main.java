@@ -21,10 +21,10 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-					Hotels.insertIntoTable();
+						Hotels.getById();
 						break;
 					case 2:
-						Hotels.readFromTable();
+						
 						break;
 					case 3:
 					
