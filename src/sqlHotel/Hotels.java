@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Hotels {
 
-	public static void CreateTable(String[] args) {
+	public static void CreateTable() {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
@@ -481,12 +481,11 @@ public class Hotels {
             con = DriverManager.getConnection(url, user, pass);
 
             Statement st = con.createStatement();
+            Scanner sa=new Scanner(System.in);
+            System.out.println("Enter id that you want to Actived: ");
+            int idinput =sa.nextInt();
            
-//            Scanner sa=new Scanner(System.in);
-//        	System.out.println("Enter id: ");
-//            int idinput =sa.nextInt();
-//            int count=0;
-            String sql = "UPDATE Hotels SET is_Active = 'false' "+" WHERE id <=10";
+            String sql = "UPDATE Hotels SET is_Active = 'true' where id<='"+idinput+"'";
             ResultSet rs=st.executeQuery(sql);
             
                  

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Room_Type {
 
 	
-		public static void CreateTable(String[] args) {
+		public static void CreateTable() {
 			String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 	        String user = "sa";
 	        String pass = "root";

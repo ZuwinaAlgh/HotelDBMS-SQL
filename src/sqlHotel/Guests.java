@@ -3,7 +3,11 @@ package sqlHotel;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Guests {
 
@@ -44,28 +48,276 @@ public class Guests {
 	}
 	
     public static void getById(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            int count=0;
+            String sql="select * from Guests where id='"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
+            
+            while (rs.next()&&count<=idinput) {
+      
+         	    int id=rs.getInt("id");
+                String guestname=rs.getString("guest_name");
+                String guestphone= rs.getString("guest_phone");
+                int guestaccompanyingmembers=rs.getInt("guest_accompanying_members");
+                int guestpaymentamount=rs.getInt("guest_payment_amount");
+                int roomid=rs.getInt("room_id");
+                int hotelid =rs.getInt("hotel_id ");
+                Date createddate= rs.getDate("created_date");
+                Date updateddate= rs.getDate("updated_date");
+                String isActive=rs.getString("is_Active");
+                System.out.println(id +" "+guestname+" "+guestphone+" "+guestaccompanyingmembers+" "+guestpaymentamount+" "+roomid+" "+hotelid+" "+createddate+" "+updateddate+" " +isActive);
+                count++;
+                
+           
+            }}
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
 		
 	}
 	
     public static void readFromTable(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("How many User you want to read: ");
+            int read =sa.nextInt();
+            int count=0;
+            String sql="select * from Guests";
+            ResultSet rs=st.executeQuery(sql);
+            
+            while (rs.next()&&count<=read) {
+      
+            	int id=rs.getInt("id");
+                String guestname=rs.getString("guest_name");
+                String guestphone= rs.getString("guest_phone");
+                int guestaccompanyingmembers=rs.getInt("guest_accompanying_members");
+                int guestpaymentamount=rs.getInt("guest_payment_amount");
+                int roomid=rs.getInt("room_id");
+                int hotelid =rs.getInt("hotel_id ");
+                Date createddate= rs.getDate("created_date");
+                Date updateddate= rs.getDate("updated_date");
+                String isActive=rs.getString("is_Active");
+                System.out.println(id +" "+guestname+" "+guestphone+" "+guestaccompanyingmembers+" "+guestpaymentamount+" "+roomid+" "+hotelid+" "+createddate+" "+updateddate+" " +isActive);
+                count++;
+                
+                 
+           
+            }}
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
 		
 	}
     
     public static void updateById(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            int count=0;
+            String sql="select * from Guests where id='"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
+            
+            while (rs.next()&&count<=idinput) {
+      
+            	int id=rs.getInt("id");
+                String guestname=rs.getString("guest_name");
+                String guestphone= rs.getString("guest_phone");
+                int guestaccompanyingmembers=rs.getInt("guest_accompanying_members");
+                int guestpaymentamount=rs.getInt("guest_payment_amount");
+                int roomid=rs.getInt("room_id");
+                int hotelid =rs.getInt("hotel_id ");
+                Date createddate= rs.getDate("created_date");
+                Date updateddate= rs.getDate("updated_date");
+                String isActive=rs.getString("is_Active");
+                System.out.println(id +" "+guestname+" "+guestphone+" "+guestaccompanyingmembers+" "+guestpaymentamount+" "+roomid+" "+hotelid+" "+createddate+" "+updateddate+" " +isActive);
+                count++;
+                 
+           
+            }}
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
 		
 	}
     
     public static void deleteById(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            String sql ="DELETE FROM Guests WHERE id = '"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
+            
+                 
+           
+            }
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
 		
 	}
     
     public static void makeIsActiveFalseById(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+           
+            Scanner sa=new Scanner(System.in);
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            int count=0;
+            String sql = "UPDATE Guests SET is_Active = 'false' "+" WHERE id = '"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
+            
+                 
+           
+            }
+      
+        
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }	
 		
 	}
     
     public static void insertIntoTable(){
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+        String user = "sa";
+        String pass = "root";
+        
+        Scanner sa=new Scanner(System.in);
+    	System.out.println("How many numbers of rows to be inserted");
+        int insert =sa.nextInt();
+        
+        
+        String guest_name="Ilham";
+        int guest_phone=326589;
+        int guest_accompanying_members=23;
+        int guest_payment_amount=400;
+        int room_id=50;
+        int hotel_id=109;
+        String created_date="2018-08-11";
+        String updated_date="2022-12-15";
+        boolean is_Active=true;
+        
+        
+        Random rn = new Random();
+        Integer numberToAdd = rn.nextInt(100);
+        
+        for(int i=0; i<=insert;i++) {
+        	String sql = "insert into Guests values ("+i+numberToAdd+", '"+guest_name+i+"',"+guest_phone+", "+guest_accompanying_members+", "+guest_payment_amount+","
+        			+ " "+room_id+", "+hotel_id+","+created_date+",'"+updated_date+"',"+is_Active+")";
+        
+        
+        Connection con = null;
+
+        try {
+
+            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            DriverManager.registerDriver(driver);
+
+            con = DriverManager.getConnection(url, user, pass);
+
+            Statement st = con.createStatement();
+
+            int m = st.executeUpdate(sql);
+            if (m >=0)
+                System.out.println( "insert data successfully");
+            else
+                System.out.println("faild inserted ");
+
+            con.close();
+        }
+
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
 		
-	}
+        }}}
     
 
-}
+
