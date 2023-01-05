@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Employee_Type {
 
-	public static void main(String[] args) {
+	public static void createTable() {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
@@ -30,8 +30,8 @@ public class Employee_Type {
 
             Statement st = con.createStatement();
 
-            int m = st.executeUpdate(SchoolSql );
-            if (m >=0)
+            int m = st.executeUpdate(SchoolSql);
+            if (m >=1)
                 System.out.println( "Created table successfully");
             else
                 System.out.println("Created table faild");

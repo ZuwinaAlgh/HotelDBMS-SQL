@@ -303,10 +303,10 @@ public class Hotels {
         
        
         
-        String hotel_name="w";
+        String hotel_name="intercontinantel";
         String hotel_location="Alqurm";
-        String created_date="2022-01-05";
-        String updated_date="2023-01-02";
+        String created_date="2010-11-08";
+        String updated_date="2022-12-08";
         boolean is_Active=true;
         
         
@@ -432,7 +432,7 @@ public class Hotels {
         }	
     }
     public static void printHotelInformation(){
-		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+    	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
         
@@ -448,17 +448,25 @@ public class Hotels {
             Statement st = con.createStatement();
            
             Scanner sa=new Scanner(System.in);
-        	System.out.println("Enter Hotel name: ");
-            String hotelname =sa.next();
-            System.out.println("Enter Hotel Location: ");
-            String hotellocation =sa.next();
+        	System.out.println("Enter id: ");
+            int idinput =sa.nextInt();
+            int count=0;
+            String sql="select * from Hotels where id='"+idinput+"'";
+            ResultSet rs=st.executeQuery(sql);
             
-            String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocation+"'";
-		     ResultSet result=st.executeQuery(sql);
-
-       
-
-            }
+            while (rs.next()&&count<=idinput) {
+      
+            	 int id=rs.getInt("id");
+                 String hotelname=rs.getString("hotel_name");
+                 String hotellocation= rs.getString("hotel_location");
+                 Date createddate= rs.getDate("created_date");
+                 Date updateddate= rs.getDate("updated_date");
+                 String isActive=rs.getString("is_Active");
+                 System.out.println(id +" "+hotelname+" "+hotellocation+" "+createddate+" "+updateddate+" " +isActive);
+                 count++;
+                 
+           
+            }}
       
         
 
@@ -484,10 +492,10 @@ public class Hotels {
             Scanner sa=new Scanner(System.in);
             System.out.println("Enter id that you want to Actived: ");
             int idinput =sa.nextInt();
-           
+            for (int i=0; i<=idinput;i++) {
             String sql = "UPDATE Hotels SET is_Active = 'true' where id<='"+idinput+"'";
             ResultSet rs=st.executeQuery(sql);
-            
+           }
                  
            
             }
@@ -496,7 +504,37 @@ public class Hotels {
 
         catch (Exception ex) {
             System.err.println(ex);
-        }	
+        }	}
+        public static void print10UnActive() {
+        	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
+            String user = "sa";
+            String pass = "root";
+            
+            Connection con = null;
+
+            try {
+
+                Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+                DriverManager.registerDriver(driver);
+
+                con = DriverManager.getConnection(url, user, pass);
+
+                Statement st = con.createStatement();
+                Scanner sa=new Scanner(System.in);
+                System.out.println("Enter id that you want to Actived: ");
+                int idinput =sa.nextInt();
+                for (int i=0; i<=idinput;i++) {
+                String sql = "UPDATE Hotels SET is_Active = 'true' where id<='"+idinput+"'";
+                ResultSet rs=st.executeQuery(sql);
+               }
+                     
+                }
+          
+            
+
+            catch (Exception ex) {
+                System.err.println(ex);
+            }	
     	
     	
     }

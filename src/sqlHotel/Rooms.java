@@ -248,13 +248,11 @@ public class Rooms {
     	System.out.println("How many numbers of rows to be inserted");
         int insert =sa.nextInt();
         
-        
-        String room_type_id="25";
-        String hotel_id="";
+        String room_type_id="12";
+        String hotel_id="56";
         String created_date="2021-01-05";
         String updated_date="2023-01-02";
         boolean is_Active=true;
-        
         
         Random rn = new Random();
         Integer numberToAdd = rn.nextInt(100);
@@ -276,14 +274,14 @@ public class Rooms {
 
             int m = st.executeUpdate(sql);
             if (m >=0)
-                System.out.println( "insert data successfully");
+                  System.out.println("insert data successfully");
             else
-                System.out.println("faild inserted ");
+                  System.out.println("faild inserted");
 
             con.close();
-        }
+          }
 
-        catch (Exception ex) {
+           catch (Exception ex) {
             System.err.println(ex);
         }
         }

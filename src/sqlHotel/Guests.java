@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Guests {
 
-	public static void main(String[] args) {
+	public static void createTable() {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
@@ -274,15 +274,15 @@ public class Guests {
         int insert =sa.nextInt();
         
         
-        String guest_name="Ilham";
-        int guest_phone=326589;
-        int guest_accompanying_members=23;
-        int guest_payment_amount=400;
-        int room_id=50;
-        int hotel_id=109;
+        String guest_name="Taima";
+        int guest_phone=3359;
+        int guest_accompanying_members=50;
+        int guest_payment_amount=850;
+        int room_id=182;
+        int hotel_id=178;
         String created_date="2018-08-11";
         String updated_date="2022-12-15";
-        boolean is_Active=true;
+        int is_Active=0;
         
         
         Random rn = new Random();

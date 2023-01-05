@@ -11,13 +11,13 @@ import java.util.Scanner;
 
 public class Employees {
 
-	public static void main(String[] args) {
+	public static void createTable() {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
         
         String SchoolSql = "CREATE TABLE Employees " + "(id INTEGER PRIMARY KEY, " + " employee_type_id INTEGER FOREIGN KEY REFERENCES Employee_Type(id), "
-				+ " room_id INTEGER FOREIGN KEY REFERENCES Hotels(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
+				+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), " + " created_date date NOT NULL, " + " updated_date date, "+" is_Active bit NOT NULL)";
         
         Connection con = null;
 
@@ -250,8 +250,8 @@ public class Employees {
         int insert =sa.nextInt();
         
         
-        int employee_type_id=22;
-        int room_id=005;
+        int employee_type_id=432;
+        int room_id=5;
         String created_date="2015-01-15";
         String updated_date="2022-01-19";
         boolean is_Active=true;
@@ -290,6 +290,8 @@ public class Employees {
 		
 	}
     }
+    
+  
 	}
 
 
