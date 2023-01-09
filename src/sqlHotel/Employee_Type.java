@@ -16,7 +16,7 @@ public class Employee_Type {
         String user = "sa";
         String pass = "root";
         
-        String SchoolSql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY, " + " employee_type_name VARCHAR(50) NOT NULL, "
+        String SchoolSql = "CREATE TABLE Employee_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " employee_type_name VARCHAR(50) NOT NULL, "
 				+ " created_date date NOT NULL, " + " updated_date date, " + " is_Active bit NOT NULL)";
         
         Connection con = null;
@@ -31,7 +31,7 @@ public class Employee_Type {
             Statement st = con.createStatement();
 
             int m = st.executeUpdate(SchoolSql);
-            if (m >=1)
+            if (m >=0)
                 System.out.println( "Created table successfully");
             else
                 System.out.println("Created table faild");
@@ -248,11 +248,11 @@ public class Employee_Type {
         Scanner sa=new Scanner(System.in);
     	System.out.println("How many numbers of rows to be inserted");
         int insert =sa.nextInt();
+        Date date = new Date(System.currentTimeMillis());
         
         
-        String employee_type_name="Hisham";
-        String created_date="2015-01-15";
-        String updated_date="2022-01-19";
+        String employee_type_name="Mohammed";
+        String created_date="2023-01-09";
         boolean is_Active=true;
         
         
@@ -260,7 +260,7 @@ public class Employee_Type {
         Integer numberToAdd = rn.nextInt(100);
         
         for(int i=0; i<=insert;i++) {
-        	String sql = "insert into Employee_Type values ("+i+numberToAdd+", '"+employee_type_name+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+        	String sql="insert into Employee_Type(employee_type_name, created_date,is_Active)values('"+employee_type_name+"','"+created_date +"','"+is_Active+"')";
         
         
         Connection con = null;

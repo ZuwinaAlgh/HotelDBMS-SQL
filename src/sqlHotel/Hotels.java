@@ -1,11 +1,11 @@
 package sqlHotel;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,7 +16,7 @@ public class Hotels {
         String user = "sa";
         String pass = "root";
         
-        String SchoolSql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY, " + " hotel_name VARCHAR(50) NOt NULL, "
+        String SchoolSql = "CREATE TABLE Hotels " + "(id INTEGER PRIMARY KEY IDENTITY(1,1) , " + " hotel_name VARCHAR(50) NOt NULL, "
 				+ " hotel_location VARCHAR(50), " + " created_date date NOT NULL, " + " updated_date date, "+"is_Active bit NOT NULL)";
         
         Connection con = null;
@@ -253,12 +253,11 @@ public class Hotels {
         Scanner sa=new Scanner(System.in);
     	System.out.println("How many numbers of rows to be inserted");
         int insert =sa.nextInt();
+        Date date=new Date(System.currentTimeMillis());
         
-        
-        String hotel_name="w";
-        String hotel_location="Alqurm";
-        String created_date="2022-01-05";
-        String updated_date="2023-01-02";
+        String hotel_name="SHANGRILA";
+        String hotel_location="BARR ALJASSA";
+        String created_date ="2023-01-09";
         boolean is_Active=true;
         
         
@@ -266,7 +265,7 @@ public class Hotels {
         Integer numberToAdd = rn.nextInt(100);
         
         for(int i=0; i<=insert;i++) {
-        	String sql = "insert into Hotels values ("+i+numberToAdd+", '"+hotel_name+i+"', '"+hotel_location+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
+        	String sql="insert into Hotels(hotel_name, hotel_location,created_date,is_Active)values('"+hotel_name+"','"+hotel_location+"','"+created_date +"','"+is_Active+"')";
         
         
         Connection con = null;

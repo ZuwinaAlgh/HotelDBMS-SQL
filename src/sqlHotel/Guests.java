@@ -1,22 +1,23 @@
 package sqlHotel;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Guests {
-
+	public static Connection con;
 	public static void createTable() {
 		String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
         String user = "sa";
         String pass = "root";
         
-        String SchoolSql = "CREATE TABLE Guests " + "(id INTEGER PRIMARY KEY, " + " guest_name VARCHAR(50) NOT NULL, "
+        String SchoolSql = "CREATE TABLE Guests " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " guest_name VARCHAR(50) NOT NULL, "
 				+ " guest_phone VARCHAR(50) NOT NULL, " + " guest_accompanying_members INTEGER NOT NULL, " + " guest_payment_amount INTEGER NOT NULL,"
 						+ " room_id INTEGER FOREIGN KEY REFERENCES Rooms(id), "
 						+ " hotel_id INTEGER FOREIGN KEY REFERENCES Hotels(id), "+" created_date date NOT NULL, "+" updated_date date, "+" is_Active bit NOT NULL)";
@@ -266,58 +267,110 @@ public class Guests {
     
     public static void insertIntoTable(){
     	String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
-        String user = "sa";
-        String pass = "root";
-        
-        Scanner sa=new Scanner(System.in);
-    	System.out.println("How many numbers of rows to be inserted");
-        int insert =sa.nextInt();
-        
-        
-        String guest_name="Taima";
-        int guest_phone=3359;
-        int guest_accompanying_members=50;
-        int guest_payment_amount=850;
-        int room_id=182;
-        int hotel_id=178;
-        String created_date="2018-08-11";
-        String updated_date="2022-12-15";
-        int is_Active=0;
-        
-        
-        Random rn = new Random();
-        Integer numberToAdd = rn.nextInt(100);
-        
-        for(int i=0; i<=insert;i++) {
-        	String sql = "insert into Guests values ("+i+numberToAdd+", '"+guest_name+i+"',"+guest_phone+", "+guest_accompanying_members+", "+guest_payment_amount+","
-        			+ " "+room_id+", "+hotel_id+","+created_date+",'"+updated_date+"',"+is_Active+")";
-        
-        
-        Connection con = null;
-
-        try {
-
-            Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            DriverManager.registerDriver(driver);
-
-            con = DriverManager.getConnection(url, user, pass);
-
-            Statement st = con.createStatement();
-
-            int m = st.executeUpdate(sql);
-            if (m >=0)
-                System.out.println( "insert data successfully");
-            else
-                System.out.println("faild inserted ");
-
-            con.close();
-        }
-
-        catch (Exception ex) {
-            System.err.println(ex);
-        }
+		String user = "sa";
+		String pass = "root";
 		
-        }}}
+		
+
+		Scanner sa = new Scanner(System.in);
+		System.out.println("How many numbers of rows to be inserted");
+		int insert = sa.nextInt();
+		Date date = new Date(System.currentTimeMillis());
+
+		String guest_name="Ali";
+		int guest_phone=256841;
+		int guest_accompanying_members=4;
+		int guest_payment_amount=150;
+		String created_date = "2023-01-09";
+		boolean is_Active = true;
+		Statement st = null;
+		Random rn = new Random();
+		Integer numberToAdd = rn.nextInt(100);
+		Integer roomid = 1;
+		Integer hotelid = 1;
+		
+		
+
+			System.out.println("choose which hotel you want:\n 1-ANTANA \n 2-ROZANA \n 3-SEAZON INN ");
+			int optios = sa.nextInt();
+			String hotelName = "";
+			if (optios > 0 && optios < 140) {
+			if (optios == 7) {
+				hotelName = "ALBALEED";
+			} else if (optios == 59) {
+				hotelName = "MYSK";
+			} else if (optios == 100) {
+				hotelName = "SHANGRILA";
+			}
+			}
+			String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
+			
+			try {
+				con = DriverManager.getConnection(url, user, pass);
+				st = con.createStatement();
+				ResultSet resultSet = st.executeQuery(sqlHotelId);
+				while (resultSet.next()) {
+					hotelid = resultSet.getInt("id");
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			System.out.print("Choose Rooms id between 1 and 3 ");
+			int optioss = sa.nextInt();
+			int Roomid =0;
+			if (optioss > 0 && optioss < 4) {
+			if (optios == 1) {
+				Roomid = 1;
+			} else if (optios == 2) {
+				Roomid= 2;
+			} else if (optios == 3) {
+				Roomid = 3;
+			}
+			}
+			for (int i = 0; i <= insert; i++) {
+			String sqlRoomType = "SELECT id From Rooms WHERE id =" + " '" + Roomid + " '";
+			try {
+				con = DriverManager.getConnection(url, user, pass);
+				st = con.createStatement();
+				ResultSet rs1 = st.executeQuery(sqlRoomType);
+				while (rs1.next()) {
+
+					Roomid = rs1.getInt("id");
+			}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+
+			String sql = "insert into Guests(guest_name,guest_phone,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,is_Active)values('" + guest_name + "',"+guest_phone+","+guest_accompanying_members+","+guest_payment_amount+","+roomid+","
+					+ hotelid + ",'" + created_date + "','" + is_Active + "')";
+
+
+			try {
+
+				Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+				DriverManager.registerDriver(driver);
+
+				con = DriverManager.getConnection(url, user, pass);
+
+				Statement st1 = con.createStatement();
+
+				int m = st1.executeUpdate(sql);
+				if (m >= 0)
+					System.out.println("insert data successfully");
+				else
+					System.out.println("faild inserted");
+
+				con.close();
+			}
+
+			catch (Exception ex) {
+				System.err.println(ex);
+			}
+		}
+		
+		}}
     
 
 

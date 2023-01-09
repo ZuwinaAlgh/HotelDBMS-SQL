@@ -1,23 +1,23 @@
 package sqlHotel;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Room_Type {
 
 	
-		public static void CreateTable() {
+		public static void CreateTable(){
 			String url = "jdbc:sqlserver://localhost:1433;databaseName=HotelDBMS;encrypt=true;trustServerCertificate=true";
 	        String user = "sa";
 	        String pass = "root";
 	        
-	        String SchoolSql = "CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY, " + " room_type_name VARCHAR(50) NOt NULL, "
+	        String SchoolSql = "CREATE TABLE Room_Type " + "(id INTEGER PRIMARY KEY IDENTITY(1,1), " + " room_type_name VARCHAR(50) NOt NULL, "
 					+ " created_date date, " + " updated_date date, " + " is_Active bit NOT NULL)";
 	        
 	        Connection con = null;
@@ -245,20 +245,18 @@ public class Room_Type {
 	        Scanner sa=new Scanner(System.in);
 	    	System.out.println("How many numbers of rows to be inserted");
 	        int insert =sa.nextInt();
+	        Date date=new Date(System.currentTimeMillis());
 	        
-	        
-	        String room_type_name="aaa";
-	        String created_date="2021-01-05";
-	        String updated_date="2023-01-02";
+	        String room_type_name="SUITE";
+	        String created_date="2023-01-08";
 	        boolean is_Active=true;
-	        
+
 	        
 	        Random rn = new Random();
 	        Integer numberToAdd = rn.nextInt(100);
 	        
 	        for(int i=0; i<=insert;i++) {
-	        	String sql = "insert into Room_Type values ("+i+numberToAdd+", '"+room_type_name+i+"', '"+created_date+"', '"+updated_date+"', '"+is_Active+"')";
-	        
+	            String sql="insert into Room_Type(room_type_name,created_date,is_Active)values('"+room_type_name+"','"+created_date+"','"+is_Active+"')";
 	        
 	        Connection con = null;
 
