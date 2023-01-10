@@ -251,7 +251,7 @@ public class Employee_Type {
         Date date = new Date(System.currentTimeMillis());
         
         
-        String employee_type_name="Mohammed";
+        String employee_type_name="DIRECTOR";
         String created_date="2023-01-09";
         boolean is_Active=true;
         

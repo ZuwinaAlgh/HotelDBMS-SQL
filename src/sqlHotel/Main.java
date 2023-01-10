@@ -28,7 +28,7 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-						Employees.insertIntoTable();
+						HotelManagement.AllRooomH();
 						break;
 						
 					case 2:

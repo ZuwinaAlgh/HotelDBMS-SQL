@@ -277,11 +277,11 @@ public class Guests {
 		int insert = sa.nextInt();
 		Date date = new Date(System.currentTimeMillis());
 
-		String guest_name="Ali";
+		String guest_name="Alice";
 		int guest_phone=256841;
 		int guest_accompanying_members=4;
 		int guest_payment_amount=150;
-		String created_date = "2023-01-09";
+		String created_date = "2023-01-10";
 		boolean is_Active = true;
 		Statement st = null;
 		Random rn = new Random();
@@ -295,11 +295,11 @@ public class Guests {
 			int optios = sa.nextInt();
 			String hotelName = "";
 			if (optios > 0 && optios < 140) {
-			if (optios == 7) {
+			if (optios == 57) {
 				hotelName = "ALBALEED";
-			} else if (optios == 59) {
+			} else if (optios == 58) {
 				hotelName = "MYSK";
-			} else if (optios == 100) {
+			} else if (optios == 99) {
 				hotelName = "SHANGRILA";
 			}
 			}
