@@ -250,58 +250,62 @@ public class Rooms {
 		
 		
 
-			System.out.println("choose which hotel you want:\n 1-ANTANA \n 2-ROZANA \n 3-SEAZON INN ");
-			int optios = sa.nextInt();
-			String hotelName = "";
-			if (optios > 0 && optios < 140) {
-			if (optios == 7) {
-				hotelName = "ALBALEED";
-			} else if (optios == 67) {
-				hotelName = "MYSK";
-			} else if (optios == 102) {
-				hotelName = "SHANGRILA";
-			}
-			}
-			String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
-			
-			try {
-				con = DriverManager.getConnection(url, user, pass);
-				st = con.createStatement();
-				ResultSet resultSet = st.executeQuery(sqlHotelId);
-				while (resultSet.next()) {
-					hotelid = resultSet.getInt("id");
+		//get hotel id
+				System.out.println(" which hotels you want: 1/ ALBALEED 2/MYSK 3/SHANGRILA : ");
+				int optios = sa.nextInt();
+				String hotelName = "";
+				if (optios > 0 && optios < 140) {
+				if (optios == 1) {
+					hotelName = "ALBALEED";
+				} else if (optios == 2) {
+					hotelName = "MYSK";
+				} else if (optios == 3) {
+					hotelName = "SHANGRILA";
 				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+				}
 			
-			System.out.print("Choose Room_Type you want:\n  1-STANDARD \n 2-DELUXE \n 3-SUITE ");
-			int optioss = sa.nextInt();
-			String RoomType = "";
-			if (optioss > 0 && optioss < 80) {
-			if (optios == 27) {
-				RoomType = "STANDARD";
-			} else if (optios == 30) {
-				RoomType = "DELUXE";
-			} else if (optios == 67) {
-				RoomType = "SUITE";
-			}
-			}
-			for (int i = 0; i <= insert; i++) {
-			String sqlRoomType = "SELECT id From Room_Type WHERE room_type_name =" + " '" + RoomType + " '";
-			try {
-				con = DriverManager.getConnection(url, user, pass);
-				st = con.createStatement();
-				ResultSet rs1 = st.executeQuery(sqlRoomType);
-				while (rs1.next()) {
+				String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
+				try {
+					con = DriverManager.getConnection(url, user, pass);
+					st = con.createStatement();
+					ResultSet rs1 = st.executeQuery(sqlHotelId);
+					while (rs1.next()) {
 
-				roomTypeid = rs1.getInt("id");
-			}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+					hotelid= rs1.getInt("id");
+				}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			
+		//get room type id
+				System.out.println(" which Room Type you want: 1/ STANDARD 2/DELUXE 3/SUITE  : ");
+				int optioss = sa.nextInt();
+				String RoomType = "";
+				if (optioss > 0 && optioss < 80) {
+				if (optios == 1) {
+					RoomType = "STANDARD";
+				} else if (optios == 2) {
+					RoomType = "DELUXE";
+				} else if (optios == 3) {
+					RoomType = "SUITE";
+				}
+				}
+				
+				String sqlRoomtypeId = "SELECT id From Room_Type WHERE room_type_name =" + " '" + RoomType + " '";
+				try {
+					con = DriverManager.getConnection(url, user, pass);
+					st = con.createStatement();
+					ResultSet rs1 = st.executeQuery(sqlRoomtypeId);
+					while (rs1.next()) {
+
+					roomTypeid = rs1.getInt("id");
+				}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		
-
+				for (int i = 0; i <= insert; i++) {
 			String sql = "insert into Rooms(room_type_id,hotel_id,created_date,is_Active)values(" + roomTypeid + ","
 					+ hotelid + ",'" + created_date + "','" + is_Active + "')";
 
