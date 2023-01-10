@@ -258,64 +258,112 @@ public class Employees {
 		Statement st = null;
 		Random rn = new Random();
 		Integer numberToAdd = rn.nextInt(100);
-		Integer empTypeId = 1;
-		Integer roomId= 1;
-		
-		
+		Integer roomTypeid = 1;
+		Integer hotelid = 1;
+		Integer roomsid =1;
+		Integer employeetypeid=1;
+		//get employee type
+		System.out.println(" which Employee type you want: 1/ ATTENDANT 2/MANAGER 3/VALET 4/BUTLER : ");
+		int optios1 = sa.nextInt();
+		String employeeTypeName = "";
+		if (optios1 > 84 && optios1 < 106) {
+		if (optios1 == 1) {
+			employeeTypeName = "ATTENDANT";
+		} else if (optios1 == 2) {
+			employeeTypeName = "MANAGER";
+		} else if (optios1 == 3) {
+			employeeTypeName = "VALET";
+		}
+		else if (optios1 == 4) {
+			employeeTypeName = "BUTLER";
+		}
+		}
+		String sqlEmployeeTypelId = "SELECT id From Employee_Type WHERE id =" + " '" + employeeTypeName + " '";
+		try {
+			con = DriverManager.getConnection(url, user, pass);
+			st = con.createStatement();
+			ResultSet rs1 = st.executeQuery(sqlEmployeeTypelId);
+			while (rs1.next()) {
 
-			System.out.println("choose Employee_Type id between  1 & 83 ");
-			int optios = sa.nextInt();
-			int empid = 0;
-			if (optios > 0 && optios < 83) {
-			if (optios == 1) {
-				empid = 1;
-			} else if (optios == 2) {
-				empid = 2;
-			} else if (optios == 3) {
-				empid = 3;
-			}
-			}
-			String sqlHotelId = "SELECT id From Employee_Type WHERE id =" + " '" + empTypeId + " '";
+				employeetypeid= rs1.getInt("id");
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//get hotel id
+		System.out.println(" which hotels you want: 1/ ALBALEED 2/MYSK 3/SHANGRILA : ");
+		int optios = sa.nextInt();
+		String hotelName = "";
+		if (optios > 0 && optios < 140) {
+		if (optios == 1) {
+			hotelName = "ALBALEED";
+		} else if (optios == 2) {
+			hotelName = "MYSK";
+		} else if (optios == 3) {
+			hotelName = "SHANGRILA";
+		}
+		}
+	
+		String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
+		try {
+			con = DriverManager.getConnection(url, user, pass);
+			st = con.createStatement();
+			ResultSet rs1 = st.executeQuery(sqlHotelId);
+			while (rs1.next()) {
+
+			hotelid= rs1.getInt("id");
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//get room type id
+		System.out.println(" which Room Type you want: 1/ STANDARD 2/DELUXE 3/SUITE  : ");
+		int optioss = sa.nextInt();
+		String RoomType = "";
+		if (optioss > 0 && optioss < 80) {
+		if (optios == 1) {
+			RoomType = "STANDARD";
+		} else if (optios == 2) {
+			RoomType = "DELUXE";
+		} else if (optios == 3) {
+			RoomType = "SUITE";
+		}
+		}
+		
+		String sqlRoomtypeId = "SELECT id From Room_Type WHERE room_type_name =" + " '" + RoomType + " '";
+		try {
+			con = DriverManager.getConnection(url, user, pass);
+			st = con.createStatement();
+			ResultSet rs1 = st.executeQuery(sqlRoomtypeId);
+			while (rs1.next()) {
+
+			roomTypeid = rs1.getInt("id");
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 			
-			try {
-				con = DriverManager.getConnection(url, user, pass);
-				st = con.createStatement();
-				ResultSet resultSet = st.executeQuery(sqlHotelId);
-				while (resultSet.next()) {
-					empTypeId = resultSet.getInt("id");
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			
-			System.out.print("Choose Rooms id between 1 and 154 ");
-			int optioss = sa.nextInt();
-			int Roomid =0;
-			if (optioss > 0 && optioss < 154) {
-			if (optios == 1) {
-				Roomid = 1;
-			} else if (optios == 2) {
-				Roomid= 2;
-			} else if (optios == 3) {
-				Roomid = 3;
-			}
-			}
+		
 			for (int i = 0; i <= insert; i++) {
-			String sqlRoomType = "SELECT id From Rooms WHERE id =" + " '" + Roomid + " '";
+			String sqlRoomType = "SELECT id From Rooms WHERE  hotel_id="+hotelid+" AND room_type_id="+roomTypeid+"";
 			try {
 				con = DriverManager.getConnection(url, user, pass);
 				st = con.createStatement();
 				ResultSet rs1 = st.executeQuery(sqlRoomType);
 				while (rs1.next()) {
 
-					Roomid = rs1.getInt("id");
+				roomsid = rs1.getInt("id");
 			}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		
 
-			String sql = "insert into Employees(employee_type_id,room_id,created_date,is_Active)values(" + empTypeId + ","+roomId+",'" + created_date + "','" + is_Active + "')";
+			String sql = "insert into Employees(employee_type_id,room_id,created_date,is_Active)values(" + employeetypeid + ","
+					+ roomsid+ ",'" + created_date + "','" + is_Active + "')";
 
 
 			try {
@@ -340,9 +388,18 @@ public class Employees {
 				System.err.println(ex);
 			}
 		}
-    }
+    	
+    	
+    	
+    	}
+    
+
+
+}
+		
+    
     
   
-	}
+	
 
 
