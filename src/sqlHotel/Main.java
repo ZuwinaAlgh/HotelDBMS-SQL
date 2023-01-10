@@ -28,7 +28,7 @@ public class Main {
 					int option = Integer.parseInt(menu);
 					switch (option) {
 					case 1:
-						Rooms.insertIntoTable();
+						Guests.insertIntoTable();
 						break;
 						
 					case 2:

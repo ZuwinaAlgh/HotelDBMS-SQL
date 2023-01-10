@@ -286,64 +286,85 @@ public class Guests {
 		Statement st = null;
 		Random rn = new Random();
 		Integer numberToAdd = rn.nextInt(100);
-		Integer roomid = 1;
+		Integer roomsid = 1;
 		Integer hotelid = 1;
+		Integer roomTypeid=1;
 		
 		
 
-			System.out.println("choose which hotel you want:\n 1-ANTANA \n 2-ROZANA \n 3-SEAZON INN ");
-			int optios = sa.nextInt();
-			String hotelName = "";
-			if (optios > 0 && optios < 140) {
-			if (optios == 57) {
-				hotelName = "ALBALEED";
-			} else if (optios == 58) {
-				hotelName = "MYSK";
-			} else if (optios == 99) {
-				hotelName = "SHANGRILA";
-			}
-			}
-			String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
-			
-			try {
-				con = DriverManager.getConnection(url, user, pass);
-				st = con.createStatement();
-				ResultSet resultSet = st.executeQuery(sqlHotelId);
-				while (resultSet.next()) {
-					hotelid = resultSet.getInt("id");
+		//get hotel id
+		System.out.println(" which hotels you want: 1/ ALBALEED 2/MYSK 3/SHANGRILA : ");
+		int optios = sa.nextInt();
+		String hotelName = "";
+		if (optios > 0 && optios < 140) {
+		if (optios == 1) {
+			hotelName = "ALBALEED";
+		} else if (optios == 2) {
+			hotelName = "MYSK";
+		} else if (optios == 3) {
+			hotelName = "SHANGRILA";
+		}
+		}
+	
+		String sqlHotelId = "SELECT id From Hotels WHERE hotel_name =" + " '" + hotelName + " '";
+		try {
+			con = DriverManager.getConnection(url, user, pass);
+			st = con.createStatement();
+			ResultSet rs1 = st.executeQuery(sqlHotelId);
+			while (rs1.next()) {
+
+			hotelid= rs1.getInt("id");
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		//get room type id
+				System.out.println(" which Room Type you want: 1/ STANDARD 2/DELUXE 3/SUITE  : ");
+				int optioss = sa.nextInt();
+				String RoomType = "";
+				if (optioss > 0 && optioss < 80) {
+				if (optios == 1) {
+					RoomType = "STANDARD";
+				} else if (optios == 2) {
+					RoomType = "DELUXE";
+				} else if (optios == 3) {
+					RoomType = "SUITE";
 				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			
-			System.out.print("Choose Rooms id between 1 and 3 ");
-			int optioss = sa.nextInt();
-			int Roomid =0;
-			if (optioss > 0 && optioss < 4) {
-			if (optios == 1) {
-				Roomid = 1;
-			} else if (optios == 2) {
-				Roomid= 2;
-			} else if (optios == 3) {
-				Roomid = 3;
-			}
-			}
-			for (int i = 0; i <= insert; i++) {
-			String sqlRoomType = "SELECT id From Rooms WHERE id =" + " '" + Roomid + " '";
-			try {
-				con = DriverManager.getConnection(url, user, pass);
-				st = con.createStatement();
-				ResultSet rs1 = st.executeQuery(sqlRoomType);
-				while (rs1.next()) {
+				}
+				
+				String sqlRoomtypeId = "SELECT id From Room_Type WHERE room_type_name =" + " '" + RoomType + " '";
+				try {
+					con = DriverManager.getConnection(url, user, pass);
+					st = con.createStatement();
+					ResultSet rs1 = st.executeQuery(sqlRoomtypeId);
+					while (rs1.next()) {
 
-					Roomid = rs1.getInt("id");
-			}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+					roomTypeid = rs1.getInt("id");
+				}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+					
+				
+					for (int i = 0; i <= insert; i++) {
+					String sqlRoomType = "SELECT id From Rooms WHERE  hotel_id="+hotelid+" AND room_type_id="+roomTypeid+"";
+					try {
+						con = DriverManager.getConnection(url, user, pass);
+						st = con.createStatement();
+						ResultSet rs1 = st.executeQuery(sqlRoomType);
+						while (rs1.next()) {
+
+						roomsid = rs1.getInt("id");
+					}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 		
 
-			String sql = "insert into Guests(guest_name,guest_phone,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,is_Active)values('" + guest_name + "',"+guest_phone+","+guest_accompanying_members+","+guest_payment_amount+","+roomid+","
+			String sql = "insert into Guests(guest_name,guest_phone,guest_accompanying_members,guest_payment_amount,room_id,hotel_id,created_date,is_Active)values('" + guest_name + "',"+guest_phone+","+guest_accompanying_members+","+guest_payment_amount+","+roomsid+","
 					+ hotelid + ",'" + created_date + "','" + is_Active + "')";
 
 
